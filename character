@@ -12,6 +12,7 @@ jumpCount = 0
 
 jumpHoldFrames = 15
 jumpTimer = 0
+
 //Step
 jump = keyboard_check_pressed(vk_space)
 jumpHold = keyboard_check(vk_space)
@@ -21,54 +22,54 @@ right = keyboard_check(ord("D"))
 xspd = (right - left) * moveSpd
 yspd += grav
 
-//jump
-if place_meeting(x,y+1,oWall)
-{
-	jumpCount = 0
-}
-else
-{
-	if jumpCount == 0
+	//jump
+	if place_meeting(x,y+1,oWall)
 	{
-		jumpCount = 1
+		jumpCount = 0
 	}
-}
-
-if jump and jumpCount < jumpMax
-{
-	jumpCount++
+	else
+	{
+		if jumpCount == 0
+		{
+			jumpCount = 1
+		}
+	}
 	
-	jumpTimer = jumpHoldFrames
-}
-
-if !jumpHold { jumpTimer = 0 }
-
-if jumpTimer > 0
-{
-	yspd = jumpSpd
-	jumpTimer--
-}
-
-//collision
-if place_meeting(x + xspd,y,oWall)
-{
-	var check = sign(xspd)
-	while !place_meeting(x + check,y,oWall)
+	if jump and jumpCount < jumpMax
 	{
-		x += check
+		jumpCount++
+		
+		jumpTimer = jumpHoldFrames
 	}
-	xspd = 0
-}
-if place_meeting(x+xspd,y + yspd,oWall)
-{
-	var check = sign(yspd)
-	while !place_meeting(x +xspd,y+check,oWall)
+	
+	if !jumpHold { jumpTimer = 0 }
+	
+	if jumpTimer > 0
 	{
-		y += check
+		yspd = jumpSpd
+		jumpTimer--
 	}
-	yspd = 0
-}
 
-//move player
-x += xspd
-y += yspd
+	//collision
+	if place_meeting(x + xspd,y,oWall)
+	{
+		var check = sign(xspd)
+		while !place_meeting(x + check,y,oWall)
+		{
+			x += check
+		}
+		xspd = 0
+	}
+	if place_meeting(x+xspd,y + yspd,oWall)
+	{
+		var check = sign(yspd)
+		while !place_meeting(x +xspd,y+check,oWall)
+		{
+			y += check
+		}
+		yspd = 0
+	}
+
+	//move player
+	x += xspd
+	y += yspd
