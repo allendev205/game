@@ -1,0 +1,74 @@
+//Create
+xspd = 0
+yspd = 0
+
+moveSpd = 5
+grav = .5
+
+jumpSpd = -5
+
+jumpMax = 2
+jumpCount = 0
+
+jumpHoldFrames = 15
+jumpTimer = 0
+//Step
+jump = keyboard_check_pressed(vk_space)
+jumpHold = keyboard_check(vk_space)
+left = keyboard_check(ord("A"))
+right = keyboard_check(ord("D"))
+
+xspd = (right - left) * moveSpd
+yspd += grav
+
+//jump
+if place_meeting(x,y+1,oWall)
+{
+	jumpCount = 0
+}
+else
+{
+	if jumpCount == 0
+	{
+		jumpCount = 1
+	}
+}
+
+if jump and jumpCount < jumpMax
+{
+	jumpCount++
+	
+	jumpTimer = jumpHoldFrames
+}
+
+if !jumpHold { jumpTimer = 0 }
+
+if jumpTimer > 0
+{
+	yspd = jumpSpd
+	jumpTimer--
+}
+
+//collision
+if place_meeting(x + xspd,y,oWall)
+{
+	var check = sign(xspd)
+	while !place_meeting(x + check,y,oWall)
+	{
+		x += check
+	}
+	xspd = 0
+}
+if place_meeting(x+xspd,y + yspd,oWall)
+{
+	var check = sign(yspd)
+	while !place_meeting(x +xspd,y+check,oWall)
+	{
+		y += check
+	}
+	yspd = 0
+}
+
+//move player
+x += xspd
+y += yspd
