@@ -1,27 +1,30 @@
 //Create
-xspd = 0
-yspd = 0
-
-moveSpd = 5
-grav = .5
-
-jumpSpd = -5
-
-jumpMax = 2
-jumpCount = 0
-
-jumpHoldFrames = 15
-jumpTimer = 0
+	xspd = 0
+	yspd = 0
+	dirx = 1
+	
+	moveSpd = 5
+	grav = .5
+	
+	jumpSpd = -5
+	
+	jumpMax = 2
+	jumpCount = 0
+	
+	jumpHoldFrames = 15
+	jumpTimer = 0
+	
+	weapon = instance_create_layer(x,y,"weapon",oStaff)
 
 //Step
-jump = keyboard_check_pressed(vk_space)
-jumpHold = keyboard_check(vk_space)
-left = keyboard_check(ord("A"))
-right = keyboard_check(ord("D"))
-
-xspd = (right - left) * moveSpd
-yspd += grav
-
+	jump = keyboard_check_pressed(vk_space)
+	jumpHold = keyboard_check(vk_space)
+	left = keyboard_check(ord("A"))
+	right = keyboard_check(ord("D"))
+	
+	xspd = (right - left) * moveSpd
+	yspd += grav
+	
 	//jump
 	if place_meeting(x,y+1,oWall)
 	{
@@ -49,7 +52,7 @@ yspd += grav
 		yspd = jumpSpd
 		jumpTimer--
 	}
-
+	
 	//collision
 	if place_meeting(x + xspd,y,oWall)
 	{
@@ -69,7 +72,14 @@ yspd += grav
 		}
 		yspd = 0
 	}
-
+	//dir
+	if sign(xspd) != 0
+	{
+		dirx = sign(xspd)
+	}
+	
 	//move player
 	x += xspd
 	y += yspd
+	weapon.x = x + dirx * 10
+	weapon.y = y
