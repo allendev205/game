@@ -1,0 +1,8 @@
+//create
+dir = oUser.dirx
+//step
+x += 10 * dir
+if place_meeting(x,y,oWall)
+{
+	instance_destroy()
+}
