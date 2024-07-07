@@ -1,0 +1,35 @@
+//create
+xspd = 0
+yspd = 0
+
+moveSpd = 5
+grav = .5
+
+jumpSpd = -5
+
+jumpMax = 1
+jumpCount = 1
+
+//step
+xspd = sign(oEnemy.x - oUser.x) * moveSpd
+yspd += grav
+
+if place_meeting(x + xspd ,y,oWall)
+{
+	if !place_meeting(x + xspd , y + 64,oWall)
+	{
+		jump = 1
+	}
+}
+  //jump
+  if place_meeting(x,y+1,oWall)
+  {
+  	jumpCount = 0
+  }
+  else
+  {
+  	if jumpCount == 0
+  	{
+  		jumpCount = 1
+  	}
+  }
