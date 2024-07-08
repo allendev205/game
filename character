@@ -15,8 +15,10 @@
 	jumpTimer = 0
 	
 	weapon = instance_create_layer(x,y,"weapon",oStaff)
-
-//Step
+	hp = instance_create_layer(x,y-32,"hp",oHp)
+	hp.Max = 100
+	hp.remain = 100
+//step
 	jump = keyboard_check_pressed(vk_space)
 	jumpHold = keyboard_check(vk_space)
 	left = keyboard_check(ord("A"))
@@ -81,5 +83,12 @@
 	//move player
 	x += xspd
 	y += yspd
+	
 	weapon.x = x + dirx * 10
 	weapon.y = y
+	
+	hp.x = x
+	hp.y = y - 48
+
+//collsion w enemy
+	hp.remain -= 10
