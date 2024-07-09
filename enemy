@@ -1,22 +1,22 @@
 //create
 
-xspd = 0
-yspd = 0
-jump = 0
-
-moveSpd = 3
-grav = .5
-
-jumpSpd = -5
-
-jumpMax = 1
-jumpCount = 0
+	xspd = 0
+	yspd = 0
+	jump = 0
+	
+	moveSpd = 3
+	grav = .5
+	
+	jumpSpd = -5
+	
+	jumpMax = 1
+	jumpCount = 0
 
 //step
 
-xspd = -sign(oEnemy.x - oUser.x) * moveSpd
-yspd += grav
-
+	xspd = -sign(oEnemy.x - oUser.x) * moveSpd
+	yspd += grav
+	
 	//jump
 	if place_meeting(x + xspd ,y,oWall)
 	{
@@ -48,7 +48,7 @@ yspd += grav
 	{
 		jumpCount++
 	}
-
+	
 	//collision
 	if place_meeting(x + xspd ,y,oWall)
 	{
@@ -68,6 +68,26 @@ yspd += grav
 		}
 		yspd = 0
 	}
+	
+	x += xspd
+	y += yspd
+	
+	hp.x = x
+	hp.y = y - 48
 
-x += xspd
-y += yspd
+//collision w magic
+	if hp.cooldown < 0
+	{
+		hp.remain -= 10
+		hp.cooldown = 4
+		with other
+		{
+			instance_destroy()
+		}
+	}
+	else
+	{
+		hp.cooldown -= 1
+	}
+
+
