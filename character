@@ -91,4 +91,13 @@
 	hp.y = y - 48
 
 //collsion w enemy
-	hp.remain -= 10
+	if hp.cooldown < 0
+	{
+		hp.remain -= 10
+		hp.cooldown = 20
+	}
+	else
+	{
+		hp.cooldown -= 1
+	}
+
