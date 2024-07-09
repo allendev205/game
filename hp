@@ -1,7 +1,8 @@
 //variable definition
   Max = 0
   remain = 0
+  cooldown = 0
 //draw
   width = sprite_get_width(sHp) * (remain / Max) 
   height = sprite_get_height(sHp)
-  draw_sprite_part(sHp,0,0,0,width,height,oUser.x,oUser.y-32)
+  draw_sprite_part(sHp,0,0,0,width,height,x-32,y-32)
