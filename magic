@@ -2,14 +2,25 @@
 	dir = point_direction(x,y,mouse_x,mouse_y)
 	direction = dir
 	speed = 5
+	
+	bounce = 1
 //step
 	x += lengthdir_x(speed,direction)
 	y += lengthdir_y(speed,direction)
 	
 	if place_meeting(x,y,oWall)
 	{
-		instance_destroy()
+		if bounce > 0
+		{
+			direction = -direction
+			bounce -= 1
+		}
+		else
+		{
+			instance_destroy()
+		}
 	}
 	if (x < 0 || x > room_width || y < 0 || y > room_height) {
 	    instance_destroy();
 	}
+
