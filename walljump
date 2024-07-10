@@ -1,0 +1,11 @@
+//create
+  touchwall = false
+//step
+  if oUser.jumpCount > 0 and touchwall and oUser.xspd == 0
+  {
+  		oUser.yspd = 0
+  }
+  else
+  {
+  	touchwall = false
+  }
