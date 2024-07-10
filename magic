@@ -1,8 +1,15 @@
 //create
-dir = oUser.dirx
+	dir = point_direction(x,y,mouse_x,mouse_y)
+	direction = dir
+	speed = 5
 //step
-x += 10 * dir
-if place_meeting(x,y,oWall)
-{
-	instance_destroy()
-}
+	x += lengthdir_x(speed,direction)
+	y += lengthdir_y(speed,direction)
+	
+	if place_meeting(x,y,oWall)
+	{
+		instance_destroy()
+	}
+	if (x < 0 || x > room_width || y < 0 || y > room_height) {
+	    instance_destroy();
+	}
