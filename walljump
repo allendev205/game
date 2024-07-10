@@ -1,9 +1,12 @@
 //create
   touchwall = false
+  yspd = 0
 //step
-  if oUser.jumpCount > 0 and touchwall and oUser.xspd == 0
+    if touchwall and oUser.xspd == 0
   {
-  		oUser.yspd = 0
+  		oUser.jumpCount = -1
+  		yspd = 0.5
+  		show_debug_message("yes")
   }
   else
   {
