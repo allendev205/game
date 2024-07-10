@@ -73,6 +73,7 @@
 		{
 			y += check
 		}
+		oWallJump.touchwall = false
 		yspd = 0
 	}
 	//dir
@@ -81,16 +82,23 @@
 		dirx = sign(xspd)
 	}
 	
+	//beside wall
+	if oWallJump.touchwall
+	{
+		yspd = oWallJump.yspd 
+	}
+	
 	//move player
 	x += xspd
 	y += yspd
+	
+	show_debug_message(yspd)
 	
 	weapon.x = x + dirx * 10
 	weapon.y = y
 	
 	hp.x = x
 	hp.y = y - 48
-
 
 //collsion w enemy
 	if hp.cooldown < 0
