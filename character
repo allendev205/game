@@ -6,9 +6,9 @@
 	moveSpd = 5
 	grav = .5
 	
-	jumpSpd = -5
+	jumpSpd = -6
 	
-	jumpMax = 2
+	jumpMax = 1
 	jumpCount = 0
 	
 	jumpHoldFrames = 15
@@ -18,6 +18,7 @@
 	hp = instance_create_layer(x,y-32,"hp",oHp)
 	hp.Max = 100
 	hp.remain = 100
+
 //step
 	jump = keyboard_check_pressed(vk_space)
 	jumpHold = keyboard_check(vk_space)
@@ -43,7 +44,6 @@
 	if jump and jumpCount < jumpMax
 	{
 		jumpCount++
-		
 		jumpTimer = jumpHoldFrames
 	}
 	
@@ -63,6 +63,7 @@
 		{
 			x += check
 		}
+		oWallJump.touchwall = true
 		xspd = 0
 	}
 	if place_meeting(x+xspd,y + yspd,oWall)
@@ -89,6 +90,7 @@
 	
 	hp.x = x
 	hp.y = y - 48
+
 
 //collsion w enemy
 	if hp.cooldown < 0
